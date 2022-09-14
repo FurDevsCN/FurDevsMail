@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="https://fur233.oss-cn-hangzhou.aliyuncs.com/files/furdevscn/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://fur233.oss-cn-hangzhou.aliyuncs.com/files/furdevscn/favicon.svg" />
     <link rel="stylesheet" href="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/css/mdui.min.css">
     <style>
         body {
@@ -103,8 +104,10 @@
                 <?php echo $page_config['line1']; ?>
             </div>
             <div class="mdui-row">
-                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent" onclick="registerBtn()">注册</button>
-                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-white" onclick="window.location.href='https://office.com/login'">登录</button>
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent"
+                    onclick="registerBtn()">注册</button>
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-white"
+                    onclick="window.location.href='https://office.com/login'">登录</button>
             </div>
 
         </div>
@@ -145,7 +148,8 @@
 
                     <br><br>
 
-                    <a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent" href="https://office.com/login" target="_blank" style="float: right">前往登录</a>
+                    <a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent"
+                        href="https://office.com/login" target="_blank" style="float: right">前往登录</a>
 
                 </div>
 
@@ -165,9 +169,9 @@
                         <span>当前：</span>
                         <select class="mdui-select" name="sku_id" mdui-select id="sku_id">
                             <?php foreach ($sku_id as $k => $v) { ?>
-                                <option value="<?php echo $v['sku_id']; ?>">
-                                    <?php echo $v['title']; ?>
-                                </option>
+                            <option value="<?php echo $v['sku_id']; ?>">
+                                <?php echo $v['title']; ?>
+                            </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -175,7 +179,8 @@
                     <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12">
                         <i class="mdui-icon material-icons">account_circle</i>
                         <label class="mdui-textfield-label">昵称</label>
-                        <input class="mdui-textfield-input" type="text" maxlength="20" required id="display_name" name="display_name">
+                        <input class="mdui-textfield-input" type="text" maxlength="20" required id="display_name"
+                            name="display_name">
                         <div class="mdui-textfield-error">昵称仅限 中文/英文/数字</div>
                         <div class="mdui-textfield-helper">账号展示的昵称</div>
                     </div>
@@ -184,15 +189,17 @@
                         <div class="mdui-textfield mdui-textfield-floating-label">
                             <i class="mdui-icon material-icons">email</i>
                             <label class="mdui-textfield-label">邮箱用户名</label>
-                            <input class="mdui-textfield-input" type="text" maxlength="20" required id="user_name" name="user_name" pattern="^[A-Za-z0-9]+$">
+                            <input class="mdui-textfield-input" type="text" maxlength="20" required id="user_name"
+                                name="user_name" pattern="^[A-Za-z0-9]+$">
                             <div class="mdui-textfield-error">邮箱前缀仅限 英文/数字</div>
                             <div class="mdui-textfield-helper">邮箱 @ 前面的字符</div>
                         </div>
-                        <select class="mdui-select" mdui-select style="margin-bottom: 28px; color: black" name="domain" id="domain">
+                        <select class="mdui-select" mdui-select style="margin-bottom: 28px; color: black" name="domain"
+                            id="domain">
                             <?php foreach ($domain as $k => $v) { ?>
-                                <option value="<?php echo $v; ?>">@
-                                    <?php echo $v; ?>
-                                </option>
+                            <option value="<?php echo $v; ?>">@
+                                <?php echo $v; ?>
+                            </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -220,7 +227,9 @@
                     <div class="mdui-col-xs-12">
                         <br>
                         <br>
-                        <input type="submit" class="mdui-col-xs-12 mdui-btn mdui-ripple mdui-btn-raised mdui-color-indigo-accent" style="float: right" id="submit" value="注册" />
+                        <input type="submit"
+                            class="mdui-col-xs-12 mdui-btn mdui-ripple mdui-btn-raised mdui-color-indigo-accent"
+                            style="float: right" id="submit" value="注册" />
                     </div>
 
 
@@ -242,14 +251,13 @@
     </div>
 
     <script src="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/js/mdui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>
 
     <script>
         // mdui 自带工具函数
         // 无需引入 jq
-        // const {
-        //     $
-        // } = mdui;
+        const {
+            $
+        } = mdui;
 
         let registerBox = new mdui.Dialog('#register-box', {
             modal: !0
@@ -261,7 +269,7 @@
         }
 
         // 注册表单
-        $('#register-form').on('submit', async function(e) {
+        $('#register-form').on('submit', async function (e) {
 
             e.preventDefault();
 
@@ -279,33 +287,31 @@
             $('hr').hide();
             mdui.mutation();
 
-            // const resp = await fetch('', {
-            //     method: 'post',
-            //     body: JSON.stringify(data),
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
-            // })
-            // const res = resp.json();
-
-            $.post('', data, function(res) {
-                $('#in-progress-content').hide();
-                $('hr').show();
-                if (res.code == 0) {
-                    $('#succeed-content').show();
-                    $('#email').val(res.data.email);
-                    $('#password').val(res.data.password);
-                } else if (res.code == 1) {
-                    $('#register-content, #activation-content').show();
-                    registerBox.close();
-                    $('#msg>.mdui-dialog-content').html(res.msg);
-                    new mdui.Dialog('#msg').open();
+            const resp = await fetch('', {
+                method: 'post',
+                body: new URLSearchParams(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
-                $('#display_name').val('');
-                $('#user_name').val('');
-                $('#invitation_code').val('');
-                $('#register-box').height('auto');
-            }, 'json');
+            })
+            const res = await resp.json();
+
+            $('#in-progress-content').hide();
+            $('hr').show();
+            if (res.code == 0) {
+                $('#succeed-content').show();
+                $('#email').val(res.data.email);
+                $('#password').val(res.data.password);
+            } else if (res.code == 1) {
+                $('#register-content, #activation-content').show();
+                registerBox.close();
+                $('#msg>.mdui-dialog-content').html(res.msg);
+                new mdui.Dialog('#msg').open();
+            }
+            $('#display_name').val('');
+            $('#user_name').val('');
+            $('#invitation_code').val('');
+            $('#register-box').height('auto');
 
 
         })
