@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="https://fur233.oss-cn-hangzhou.aliyuncs.com/files/furdevscn/favicon.svg" />
+    <link rel="stylesheet" href="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/css/mdui.min.css">
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .c-icon {
+            background-size: 24px;
+        }
+
+        .c-icon.c-icon-github {
+            background-image: url(https://github.githubassets.com/favicons/favicon.png);
+        }
+
+        .bg-box {
+            z-index: -3;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1s, transform .25s, filter .25s;
+            backface-visibility: hidden;
+        }
+
+        .title-icon {
+            width: 48px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 90vh;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-box>* {
+            margin: 5px;
+        }
+
+        .register-email-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .register-email-box>.mdui-textfield {
+            flex-grow: 1;
+        }
+    </style>
+    <title>
+        <?php echo $page_config['title']; ?>
+    </title>
+</head>
+
+<body class="mdui-theme-primary-white mdui-theme-accent-indigo">
+
+    <!-- 应用栏 -->
+    <div class="mdui-appbar mdui-color-white">
+        <div class="mdui-toolbar">
+
+            <img class="title-icon" src="https://fur233.oss-cn-hangzhou.aliyuncs.com/files/furdevscn/favicon.svg"></img>
+            <span class="mdui-typo-display-1 mdui-hidden-xs">|</span>
+            <span class="mdui-typo-title">FurDevsCN Mail System</span>
+
+            <div class="mdui-toolbar-spacer"></div>
+
+            <a href="https://github.com/FurDevsCN" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons c-icon c-icon-github"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="content mdui-text-color-white-text">
+
+        <div class="content-box">
+
+            <div class="mdui-center mdui-typo-display-3">
+                <?php echo $page_config['title']; ?>
+            </div>
+            <div class="mdui-typo-title-opacity">
+                <?php echo $page_config['line1']; ?>
+            </div>
+            <div class="mdui-row">
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent" onclick="registerBtn()">注册</button>
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-white" onclick="window.location.href='https://office.com/login'">登录</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 背景图 -->
+    <div class="bg-box">
+        <img src="https://fur233.oss-cn-hangzhou.aliyuncs.com/files/CircumnavigationAnni_ZH-CN6835512993_1920x1080.jpg">
+    </div>
+
+    <!-- 对话框 -->
+
+    <!-- 注册 -->
+    <div class="mdui-dialog" id="register-box">
+
+        <div class="mdui-dialog-content">
+
+            <div class="mdui-typo-title">账户注册</div>
+
+            <hr><br>
+
+            <form id="register-form">
+
+                <!-- 成功后信息 -->
+                <div id="succeed-content" style="display: none;">
+
+                    <div class="mdui-textfield">
+                        <i class="mdui-icon material-icons mdui-text-color-pink">email</i>
+                        <p>邮箱：</p>
+                        <input class="mdui-textfield-input" type="email" value="" id="email">
+                    </div>
+                    <div class="mdui-textfield">
+                        <i class="mdui-icon material-icons mdui-text-color-pink">lock</i>
+                        <p>初始密码：</p>
+                        <input class="mdui-textfield-input" type="text" value="" id="password">
+                    </div>
+
+                    <br><br>
+
+                    <a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent" href="https://office.com/login" target="_blank" style="float: right">前往登录</a>
+
+                </div>
+
+                <!-- 工作中信息 -->
+                <div id="in-progress-content" class="mdui-progress" style="display: none;">
+                    <div class="mdui-progress-indeterminate"></div>
+                </div>
+
+                <!-- 注册信息 -->
+                <div id="register-content" class="mdui-col-xs-12 mdui-col-md-6">
+
+                    <div class="mdui-typo-subheading">注册信息</div>
+
+                    <br>
+
+                    <div class="mdui-col-xs-12">
+                        <span>当前：</span>
+                        <select class="mdui-select" name="sku_id" mdui-select id="sku_id">
+                            <?php foreach ($sku_id as $k => $v) { ?>
+                                <option value="<?php echo $v['sku_id']; ?>">
+                                    <?php echo $v['title']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12">
+                        <i class="mdui-icon material-icons">account_circle</i>
+                        <label class="mdui-textfield-label">昵称</label>
+                        <input class="mdui-textfield-input" type="text" maxlength="20" required id="display_name" name="display_name">
+                        <div class="mdui-textfield-error">昵称仅限 中文/英文/数字</div>
+                        <div class="mdui-textfield-helper">账号展示的昵称</div>
+                    </div>
+
+                    <div class="mdui-col-xs-12 register-email-box">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <i class="mdui-icon material-icons">email</i>
+                            <label class="mdui-textfield-label">邮箱用户名</label>
+                            <input class="mdui-textfield-input" type="text" maxlength="20" required id="user_name" name="user_name" pattern="^[A-Za-z0-9]+$">
+                            <div class="mdui-textfield-error">邮箱前缀仅限 英文/数字</div>
+                            <div class="mdui-textfield-helper">邮箱 @ 前面的字符</div>
+                        </div>
+                        <select class="mdui-select" mdui-select style="margin-bottom: 28px; color: black" name="domain" id="domain">
+                            <?php foreach ($domain as $k => $v) { ?>
+                                <option value="<?php echo $v; ?>">@
+                                    <?php echo $v; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <!-- 激活信息 -->
+                <div id="activation-content" class="mdui-col-xs-12 mdui-col-md-6">
+
+                    <div class="mdui-typo-subheading">激活信息</div>
+
+                    <br>
+
+                    <div class="mdui-col-xs-12">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <i class="mdui-icon material-icons">credit_card</i>
+                            <label class="mdui-textfield-label">激活码</label>
+                            <input class="mdui-textfield-input" type="text" required id="invitation_code" name="code">
+                            <div class="mdui-textfield-error">必填</div>
+                            <div class="mdui-textfield-helper">激活码请在群内获取</div>
+                        </div>
+                    </div>
+
+                    <div class="mdui-col-xs-12">
+                        <br>
+                        <br>
+                        <input type="submit" class="mdui-col-xs-12 mdui-btn mdui-ripple mdui-btn-raised mdui-color-indigo-accent" style="float: right" id="submit" value="注册" />
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- 失败 -->
+    <div class="mdui-dialog" id="msg">
+        <div class="mdui-dialog-title">创建失败...</div>
+        <div class="mdui-dialog-content">激活码无效！</div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>我知道了</button>
+        </div>
+    </div>
+
+    <script src="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/js/mdui.min.js"></script>
+
+    <script>
+        // mdui 自带工具函数
+        // 无需引入 jq
+        const {
+            $
+        } = mdui;
+
+        let registerBox = new mdui.Dialog('#register-box', {
+            modal: !0
+        })
+
+        // 注册按钮
+        function registerBtn() {
+            registerBox.open();
+        }
+
+        // 注册表单
+        $('#register-form').on('submit', function(e) {
+
+            e.preventDefault();
+
+            const data = {
+                sku_id: $('#sku_id').val(),
+                display_name: $('#display_name').val().trim(),
+                user_name: $('#user_name').val().trim(),
+                domain: $('#domain').val(),
+                invitation_code: $('#invitation_code').val().trim(),
+            }
+
+            $('#register-content, #activation-content').hide();
+            $('#in-progress-content').show();
+            $('#register-box').height('auto');
+            $('hr').hide();
+            mdui.mutation();
+
+            $.post('', data, function(res) {
+                $('#in-progress-content').hide();
+                $('hr').show();
+                if (res.code == 0) {
+                    $('#succeed-content').show();
+                    $('#email').val(res.data.email);
+                    $('#password').val(res.data.password);
+                } else if (res.code == 1) {
+                    $('#register-content, #activation-content').show();
+                    registerBox.close();
+                    $('#msg>.mdui-dialog-content').html(res.msg);
+                    new mdui.Dialog('#msg').open();
+                }
+                $('#display_name').val('');
+                $('#user_name').val('');
+                $('#invitation_code').val('');
+                $('#register-box').height('auto');
+            }, 'json');
+
+
+        })
+    </script>
+
+</body>
+
+</html>
