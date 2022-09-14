@@ -242,7 +242,8 @@
     </div>
 
     <script src="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/js/mdui.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>
+    
     <script>
         // mdui 自带工具函数
         // 无需引入 jq
@@ -260,7 +261,7 @@
         }
 
         // 注册表单
-        $('#register-form').on('submit', function(e) {
+        $('#register-form').on('submit', async function(e) {
 
             e.preventDefault();
 
@@ -277,6 +278,15 @@
             $('#register-box').height('auto');
             $('hr').hide();
             mdui.mutation();
+
+            // const resp = await fetch('', {
+            //     method: 'post',
+            //     body: JSON.stringify(data),
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // })
+            // const res = resp.json();
 
             $.post('', data, function(res) {
                 $('#in-progress-content').hide();
